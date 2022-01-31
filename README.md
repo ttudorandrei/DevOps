@@ -77,6 +77,7 @@ For Linux Ubuntu Distro, you can use several commands to update and install pack
 - `sudo apt-get install <package-name>` installs the specified package
 - `systemctl status <app-name>` returns the status for the specified app
 - `exit` will exit the Virtual Machine
+- use `-y` when installing or upgrading/updating packages to automatically confirm everything
 
 ### Useful commands
 
