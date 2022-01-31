@@ -13,6 +13,10 @@
 
 ### Monolith - 2 tier & Microservices Architectures
 
+## Virtualisation with Vagrant
+
+![virtualisation-with-vagrant-diagram](./public/assets/img/virtualisation-with-vagrant-diagram.png)
+
 ## Installing dependencies and creating first VM (Windows)
 
 ### Step 1 - Install Ruby
