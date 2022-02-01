@@ -87,3 +87,77 @@ For Linux Ubuntu Distro, you can use several commands to update and install pack
 - `vagrant halt` pauses the VM
 - `vagrant reload` updates the VM (for example when you update the vagrant file)
 - `vagrant ssh` enter the VM
+
+### Linux Basics
+
+- `uname` finds out the name of the machine. Add `-a` flag to add extra info with the name.
+- `pwd` displays the path to current folder.
+- `ls` lists directories/files. Add the `-al` flag to format the nicely when displayed and displays the hidden folder/files.
+- `mkdir <directory-name>` make directory.
+- `cd <name of directory>` changes the directory. If you don't specify the name of the folder, it will return you to the root folder.
+- `touch <file-name>` creates a file.
+- `nano <file-name>` creates a text file using nano.
+- `cat <file-name>` displays the content of the file.
+- `rm -rf <file-name>` removes the specified filename.
+- `cp <file-destination-name> <final-destination>` copies the specified file to the specified destination.
+- `mv <file-name(with path if necessary)> <destination-filepath>` moves a certain file to a specified folder.
+- `top` check running processes
+
+### Bash scripting
+
+- READ Write Executable read-only.
+- To check permissions `ll`.
+- `chmod <permission> <file-name>` to change permission.
+- When you make a file executable, it is good practice to make it read-only.
+
+### Automate updates, upgrades and install of nginx
+
+- create `provision.sh` file
+- add this block of code inside `provision.sh`:
+
+  ```
+  #!/bin/bash
+
+  # run updates
+  sudo apt-get update -y
+
+  # run upgrades
+  sudo apt-get upgrade -y
+
+  # install nginx
+  sudo apt-get install nginx -y
+  ```
+
+  This will ask Linux to install the updates, upgrade the files and install nginx.
+
+- Make `provision.sh` executable by typing `chmod +x provision.sh`. This gives the file `executable permission`
+- run `provision.sh` file by typing in the terminal `sudo provision.sh`
+
+### Add provision file file and
+
+- create a folder called `src` in the same location that the `vagrant` file is in.
+- add a `provision.sh` file inside the `src` folder.
+- add the next code snippet inside the `provision.sh` file to update, upgrade and install nginx:
+
+  ```
+  #!/bin/bash
+
+  # run updates
+  sudo apt-get update -y
+
+  # run upgrades
+  sudo apt-get upgrade -y
+
+  # install nginx
+  sudo apt-get install nginx -y
+  ```
+
+- add the next block of code in your `vagrantfile` file.
+
+  ```
+  # sync folder
+  config.vm.synced_folder "./src", "/home/vagrant/code"
+
+  # sync and run provision file
+  config.vm.provision "shell", path: "./src/provision.sh"
+  ```
