@@ -1,25 +1,24 @@
 # What is DevOps
 
-## Why DevOps?
+## Why DevOps?- [What is DevOps](#what-is-devops)
 
-- [What is DevOps](#what-is-devops)
-  - [Why DevOps?](#why-devops)
-    - [Monolith - 2 tier & Microservices Architectures](#monolith---2-tier--microservices-architectures)
-  - [Virtualisation with Vagrant](#virtualisation-with-vagrant)
-  - [Installing dependencies and creating first VM on Windows](#installing-dependencies-and-creating-first-vm-on-windows)
-    - [Step 1 - Install Ruby](#step-1---install-ruby)
-    - [Step 2 - Install Vagrant](#step-2---install-vagrant)
-    - [Step 3 - Install Virtualbox](#step-3---install-virtualbox)
-    - [Step 4 - Add the vagrant file](#step-4---add-the-vagrant-file)
-    - [Run your VM](#run-your-vm)
-    - [Update and install packages in VM](#update-and-install-packages-in-vm)
-    - [Useful commands](#useful-commands)
-    - [Linux Basics](#linux-basics)
-    - [Bash scripting](#bash-scripting)
-    - [Automate updates, upgrades and install of nginx](#automate-updates-upgrades-and-install-of-nginx)
-    - [Add provision file file and](#add-provision-file-file-and)
-    - [Questions to ask DEV team before deploying](#questions-to-ask-dev-team-before-deploying)
-    - [Install and run spec tests](#install-and-run-spec-tests)
+- [Why DevOps?](#why-devops)
+  - [Monolith 2 tier & Microservices Architectures](#monolith-2-tier--microservices-architectures)
+- [Virtualisation with Vagrant](#virtualisation-with-vagrant)
+- [Installing dependencies and creating first VM on Windows](#installing-dependencies-and-creating-first-vm-on-windows)
+  - [Step 1 _Install Ruby_](#step-1-install-ruby)
+  - [Step 2 _Install Vagrant_](#step-2-install-vagrant)
+  - [Step 3 _Install Virtualbox_](#step-3-install-virtualbox)
+  - [Step 4 _Add the vagrant file_](#step-4-add-the-vagrant-file)
+  - [Run your VM](#run-your-vm)
+  - [Update and install packages in VM](#update-and-install-packages-in-vm)
+  - [Useful commands](#useful-commands)
+  - [Linux Basics](#linux-basics)
+  - [Bash scripting](#bash-scripting)
+  - [Automate updates, upgrades and install of nginx](#automate-updates-upgrades-and-install-of-nginx)
+  - [Add provision file file and](#add-provision-file-file-and)
+  - [Questions to ask DEV team before deploying](#questions-to-ask-dev-team-before-deploying)
+  - [Install and run spec tests](#install-and-run-spec-tests)
 
 **Four pillars of DevOps best practice**
 
@@ -28,7 +27,7 @@
 - Robustness - faster delivery of product
 - Cost - cost effective (by automating the process, creating CI/CD pipelines)
 
-### Monolith - 2 tier & Microservices Architectures
+### Monolith 2 tier & Microservices Architectures
 
 ## Virtualisation with Vagrant
 
@@ -36,19 +35,19 @@
 
 ## Installing dependencies and creating first VM on Windows
 
-### Step 1 - Install Ruby
+### Step 1 _Install Ruby_
 
 - Go to this link and download **Ruby** `https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.6.6-1/rubyinstaller-devkit-2.6.6-1-x64.exe`
 
 - To check if Ruby is installed correctly, run `ruby --version` in your terminal. If it returns a version it means that Ruby is correctly installed on your machine.
 
-### Step 2 - Install Vagrant
+### Step 2 _Install Vagrant_
 
 - Install Vagrant by clicking on [this link](https://www.vagrantup.com).
 - Check vagrant version by typing `vagrant --version` in your terminal.
 - To view a list of commands, type in `vagrant` in your terminal.
 
-### Step 3 - Install Virtualbox
+### Step 3 _Install Virtualbox_
 
 - Install Virtualbox by clicking on [this link](https://www.virtualbox.org/wiki/Downloads) and, from **"VirtualBox 6.1.32 platform packages"** choose `Windows hosts`.
 - Install everything that you are being asked to.
@@ -60,7 +59,7 @@
 - Click on Install => Service
 - Under Manufacturer choose Oracle Corporation and under Network Service, choose VirtualBox NDIS6 Bridged Networking driver
 
-### Step 4 - Add the vagrant file
+### Step 4 _Add the vagrant file_
 
 - This file `needs` to be in the folder that you're running the VM from
 - Use `nano vagrantfile` and add this block of code:
