@@ -2,7 +2,24 @@
 
 ## Why DevOps?
 
-### Benefits of DevOps
+- [What is DevOps](#what-is-devops)
+  - [Why DevOps?](#why-devops)
+    - [Monolith - 2 tier & Microservices Architectures](#monolith---2-tier--microservices-architectures)
+  - [Virtualisation with Vagrant](#virtualisation-with-vagrant)
+  - [Installing dependencies and creating first VM on Windows](#installing-dependencies-and-creating-first-vm-on-windows)
+    - [Step 1 - Install Ruby](#step-1---install-ruby)
+    - [Step 2 - Install Vagrant](#step-2---install-vagrant)
+    - [Step 3 - Install Virtualbox](#step-3---install-virtualbox)
+    - [Step 4 - Add the vagrant file](#step-4---add-the-vagrant-file)
+    - [Run your VM](#run-your-vm)
+    - [Update and install packages in VM](#update-and-install-packages-in-vm)
+    - [Useful commands](#useful-commands)
+    - [Linux Basics](#linux-basics)
+    - [Bash scripting](#bash-scripting)
+    - [Automate updates, upgrades and install of nginx](#automate-updates-upgrades-and-install-of-nginx)
+    - [Add provision file file and](#add-provision-file-file-and)
+    - [Questions to ask DEV team before deploying](#questions-to-ask-dev-team-before-deploying)
+    - [Install and run spec tests](#install-and-run-spec-tests)
 
 **Four pillars of DevOps best practice**
 
@@ -17,7 +34,7 @@
 
 ![virtualisation-with-vagrant-diagram](./public/assets/img/virtualisation-with-vagrant-diagram.png)
 
-## Installing dependencies and creating first VM (Windows)
+## Installing dependencies and creating first VM on Windows
 
 ### Step 1 - Install Ruby
 
@@ -43,7 +60,7 @@
 - Click on Install => Service
 - Under Manufacturer choose Oracle Corporation and under Network Service, choose VirtualBox NDIS6 Bridged Networking driver
 
-### Step 4 - add the vagrant file
+### Step 4 - Add the vagrant file
 
 - This file `needs` to be in the folder that you're running the VM from
 - Use `nano vagrantfile` and add this block of code:
@@ -135,6 +152,8 @@ For Linux Ubuntu Distro, you can use several commands to update and install pack
 
 ### Add provision file file and
 
+**All commands that need to be run when creating the VM (such as updates, upgrades, installing dependencies need to be added to this file. This will run them when the VM is created.)**
+
 - create a folder called `src` in the same location that the `vagrant` file is in.
 - add a `provision.sh` file inside the `src` folder.
 - add the next code snippet inside the `provision.sh` file to update, upgrade and install nginx:
@@ -152,7 +171,7 @@ For Linux Ubuntu Distro, you can use several commands to update and install pack
   sudo apt-get install nginx -y
   ```
 
-- add the next block of code in your `vagrantfile` file.
+- add the next block of code in your `vagrantfile` file to add current folder in the VM when creating it.
 
   ```
   # sync folder       , localhost path, path for vm
@@ -163,3 +182,20 @@ For Linux Ubuntu Distro, you can use several commands to update and install pack
   ```
 
 - to update VM with the provisioned commands, stop the VM and restart it with `vagrant up --provision`. When you create a new vm with a `provision script`, you do not need the `--provision` flag.
+
+### Questions to ask DEV team before deploying
+
+- What dependencies are required?
+- Which operating system/platform can it be tested and deployed on?
+- Which port do we need to allow?
+- What hardware specs do we need to run it on?
+
+### Install and run spec tests
+
+- In the spec-tests folder, when you run the tests, it will show you a list of dependencies that the app will need to run. You can install and add them to the `provision.sh` file so they are being installed automatically when the VM is created.
+- `cd` into the parent directory, the one containing the `environment` folder
+- `cd` into spec-tests
+- type `gem install bundler` to install `bundler` package manager (similar with `pip` for python)
+- `bundle` will install all of the requirements for running the specs tests with Ruby
+- `rake spec` from this location to run the tests. This will return the dependencies needed for the app.
+- Install all of the dependencies missing in your VM and run the `rake spec` command in your other terminal to make sure that all of the spec tests are passing.
