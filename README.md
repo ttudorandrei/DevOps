@@ -155,9 +155,11 @@ For Linux Ubuntu Distro, you can use several commands to update and install pack
 - add the next block of code in your `vagrantfile` file.
 
   ```
-  # sync folder
-  config.vm.synced_folder "./src", "/home/vagrant/code"
+  # sync folder       , localhost path, path for vm
+  config.vm.synced_folder ".", "/home/vagrant/code"
 
   # sync and run provision file
   config.vm.provision "shell", path: "./src/provision.sh"
   ```
+
+- to update VM with the provisioned commands, stop the VM and restart it with `vagrant up --provision`. When you create a new vm with a `provision script`, you do not need the `--provision` flag.
