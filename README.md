@@ -23,6 +23,7 @@
     - [Linux Variables](#linux-variables)
     - [Environment Variables](#environment-variables)
     - [Reverse Proxy (with Nginx)](#reverse-proxy-with-nginx)
+    - [Connect two VM's (app and DB)](#connect-two-vms-app-and-db)
 
 **Four pillars of DevOps best practice**
 
@@ -224,3 +225,48 @@ For Linux Ubuntu Distro, you can use several commands to update and install pack
 - If `pm2` throws an error, use this command to download the compatible version of `pm2`: `sudo npm install -g pm2@^3`.
 - Make sure the port you are running your app on is not used by some other app `sudo lsof -iTCP -sTCP:LISTEN -P`
 - After editing the appropriate file with `sudo nano /etc/nginx/sites-available/default` make sure you check for errors in nginx with `sudo nginx -t`, restart the service with `sudo systemctl restart nginx` and check it's status with `sudo systemctl status nginx`
+
+  ```
+      location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+  }
+  ```
+
+### Connect two VM's (app and DB)
+
+- The next block of code is an example of a vagrant file launching two VMs.
+
+```
+
+Vagrant.configure("2") do |config| # naming the vm
+config.vm.define "app" do |app|
+
+      # creating a virtual machine ubuntu
+      app.vm.box = "ubuntu/xenial64"
+
+      # creating a private network with ip
+      app.vm.network "private_network", ip: "192.168.10.100"
+
+      # sync folder
+      app.vm.synced_folder ".", "/home/vagrant/app"
+
+      # sync and run provision file
+      app.vm.provision "shell", path: "./src/provision.sh", privileged: false
+
+    end
+
+    config.vm.define "db" do |db|
+      db.vm.box = "ubuntu/xenial64"
+      db.vm.network "private_network", ip: "192.168.10.150"
+
+    end
+
+end
+
+```
