@@ -1,12 +1,15 @@
-var express = require("express");
-var app = express();
-var exec = require("child_process").exec;
-var mongoose = require("mongoose");
-var Post = require("./models/post");
+const express = require("express");
+const app = express();
+const exec = require("child_process").exec;
+const mongoose = require("mongoose");
+
+const Post = require("./models/post");
+const logger = require("./middleware/logger");
 
 app.set("view engine", "ejs");
 
 app.use(express.static("public"));
+app.use(logger);
 
 app.get("/", function (req, res) {
   res.render("index");
@@ -38,7 +41,7 @@ app.get("/fibonacci/:n", function (req, res) {
 //   });
 // });
 
-app.listen(3030, function () {
+app.listen(3000, function () {
   console.log("Your app is ready and listening on port 3000");
 });
 
