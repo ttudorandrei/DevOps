@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const Post = require("./models/post");
 const logger = require("./middleware/logger");
 
+app.set("views", "./views");
 app.set("view engine", "ejs");
 
 app.use(express.static("public"));
@@ -45,7 +46,7 @@ app.listen(3000, function () {
   console.log("Your app is ready and listening on port 3000");
 });
 
-// deliberately poorly implemented fibonnaci
+// deliberately poorly implemented fibonacci
 function fibonacci(n) {
   if (n == 0) return 0;
 

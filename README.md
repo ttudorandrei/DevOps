@@ -240,6 +240,8 @@ For Linux Ubuntu Distro, you can use several commands to update and install pack
 
 ### Connect two VM's (app and DB)
 
+- You need to add the extra machines in the `vagrant file`. See example below.
+- (if needed) Use this link for a more detailed [walk-through](https://www.vagrantup.com/docs/multi-machine)
 - The next block of code is an example of a vagrant file launching two VMs.
 
 ```
