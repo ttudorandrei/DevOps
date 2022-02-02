@@ -2,23 +2,27 @@
 
 ## Why DevOps?- [What is DevOps](#what-is-devops)
 
-- [Why DevOps?](#why-devops)
-  - [Monolith 2 tier & Microservices Architectures](#monolith-2-tier--microservices-architectures)
-- [Virtualisation with Vagrant](#virtualisation-with-vagrant)
-- [Installing dependencies and creating first VM on Windows](#installing-dependencies-and-creating-first-vm-on-windows)
-  - [Step 1 _Install Ruby_](#step-1-install-ruby)
-  - [Step 2 _Install Vagrant_](#step-2-install-vagrant)
-  - [Step 3 _Install Virtualbox_](#step-3-install-virtualbox)
-  - [Step 4 _Add the vagrant file_](#step-4-add-the-vagrant-file)
-  - [Run your VM](#run-your-vm)
-  - [Update and install packages in VM](#update-and-install-packages-in-vm)
-  - [Useful commands](#useful-commands)
-  - [Linux Basics](#linux-basics)
-  - [Bash scripting](#bash-scripting)
-  - [Automate updates, upgrades and install of nginx](#automate-updates-upgrades-and-install-of-nginx)
-  - [Add provision file file and](#add-provision-file-file-and)
-  - [Questions to ask DEV team before deploying](#questions-to-ask-dev-team-before-deploying)
-  - [Install and run spec tests](#install-and-run-spec-tests)
+- [What is DevOps](#what-is-devops)
+  - [Why DevOps?- What is DevOps](#why-devops--what-is-devops)
+    - [Monolith 2 tier & Microservices Architectures](#monolith-2-tier--microservices-architectures)
+  - [Virtualisation with Vagrant](#virtualisation-with-vagrant)
+  - [Installing dependencies and creating first VM on Windows](#installing-dependencies-and-creating-first-vm-on-windows)
+    - [Step 1 _Install Ruby_](#step-1-install-ruby)
+    - [Step 2 _Install Vagrant_](#step-2-install-vagrant)
+    - [Step 3 _Install Virtualbox_](#step-3-install-virtualbox)
+    - [Step 4 _Add the vagrant file_](#step-4-add-the-vagrant-file)
+    - [Run your VM](#run-your-vm)
+    - [Update and install packages in VM](#update-and-install-packages-in-vm)
+    - [Useful commands](#useful-commands)
+    - [Linux Basics](#linux-basics)
+    - [Bash scripting](#bash-scripting)
+    - [Automate updates, upgrades and install of nginx](#automate-updates-upgrades-and-install-of-nginx)
+    - [Add provision file file and](#add-provision-file-file-and)
+    - [Questions to ask DEV team before deploying](#questions-to-ask-dev-team-before-deploying)
+    - [Install and run spec tests](#install-and-run-spec-tests)
+    - [Linux Variables](#linux-variables)
+    - [Environment Variables](#environment-variables)
+    - [Reverse Proxy (with Nginx)](#reverse-proxy-with-nginx)
 
 **Four pillars of DevOps best practice**
 
@@ -192,9 +196,31 @@ For Linux Ubuntu Distro, you can use several commands to update and install pack
 ### Install and run spec tests
 
 - In the spec-tests folder, when you run the tests, it will show you a list of dependencies that the app will need to run. You can install and add them to the `provision.sh` file so they are being installed automatically when the VM is created.
-- `cd` into the parent directory, the one containing the `environment` folder
-- `cd` into spec-tests
-- type `gem install bundler` to install `bundler` package manager (similar with `pip` for python)
-- `bundle` will install all of the requirements for running the specs tests with Ruby
+- `cd` into the parent directory, the one containing the `environment` folder.
+- `cd` into spec-tests.
+- type `gem install bundler` to install `bundler` package manager (similar with `pip` for python).
+- `bundle` will install all of the requirements for running the specs tests with Ruby.
 - `rake spec` from this location to run the tests. This will return the dependencies needed for the app.
 - Install all of the dependencies missing in your VM and run the `rake spec` command in your other terminal to make sure that all of the spec tests are passing.
+
+### Linux Variables
+
+- Create Linux variable using this command in the terminal `FIRST_NAME=TUDOR`. This env var is not permanent.
+- How to check the var `echo $<KEYNAME>` for example, `echo $FIRST_NAME`.
+
+### Environment Variables
+
+- How to check `environment variables`.
+- Command: `printenv key` to print specific env var or `env` to list all env variables.
+- Create env var with using the `export` command. Ex: `export FIRST_NAME=TUDOR`.
+- How to make env var persistent: In your `.bashrc` file, use this to create a persistent variable: `export <VARIABLE_NAME>=<VARIABLE_VALUE>`. Then do `source ~/.bashrc` to reload the .bashrc file without restarting the VM.
+- `unset <ENV_NAME>` to delete the specific env variable.
+- How to kill a Linux process: `top` to view all processes and then `sudo kill <process-id>`.
+- How to use `grep` & | ------- example: `env | grep HOME`.
+
+### Reverse Proxy (with Nginx)
+
+- Follow this link to create a reverse proxy with nginx: [Digital Ocean Guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04#step-3-installing-pm2)
+- If `pm2` throws an error, use this command to download the compatible version of `pm2`: `sudo npm install -g pm2@^3`.
+- Make sure the port you are running your app on is not used by some other app `sudo lsof -iTCP -sTCP:LISTEN -P`
+- After editing the appropriate file with `sudo nano /etc/nginx/sites-available/default` make sure you check for errors in nginx with `sudo nginx -t`, restart the service with `sudo systemctl restart nginx` and check it's status with `sudo systemctl status nginx`
