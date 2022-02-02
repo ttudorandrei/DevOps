@@ -18,5 +18,8 @@ sudo apt-get install nodejs -y
 # install pm2 package globally
 sudo npm install pm2 -g
 
+# install the forever package
+sudo npm install forever -g
+
 # change directory to specified path
-# cd /app/app
+cd /home/vagrant/app/app && npm install && forever start app.js
