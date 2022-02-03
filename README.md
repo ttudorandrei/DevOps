@@ -23,7 +23,10 @@
     - [Linux Variables](#linux-variables)
     - [Environment Variables](#environment-variables)
     - [Reverse Proxy (with Nginx)](#reverse-proxy-with-nginx)
-    - [Connect two VM's (app and DB)](#connect-two-vms-app-and-db)
+    - [Create two VM's (app and DB)](#create-two-vms-app-and-db)
+    - [Install mongodb on the db machine](#install-mongodb-on-the-db-machine)
+    - [Connect the two VMs](#connect-the-two-vms)
+    - [Automate the db](#automate-the-db)
 
 **Four pillars of DevOps best practice**
 
@@ -123,6 +126,8 @@ For Linux Ubuntu Distro, you can use several commands to update and install pack
 - `cp <file-destination-name> <final-destination>` copies the specified file to the specified destination.
 - `mv <file-name(with path if necessary)> <destination-filepath>` moves a certain file to a specified folder.
 - `top` check running processes
+- `sed`
+- `sudo sed -i 's/string-to-find/string-to-replace-with/' /file-path/filename.extension`
 
 ### Bash scripting
 
@@ -238,7 +243,7 @@ For Linux Ubuntu Distro, you can use several commands to update and install pack
   }
   ```
 
-### Connect two VM's (app and DB)
+### Create two VM's (app and DB)
 
 - You need to add the extra machines in the `vagrant file`. See example below.
 - (if needed) Use this link for a more detailed [walk-through](https://www.vagrantup.com/docs/multi-machine)
@@ -272,3 +277,51 @@ config.vm.define "app" do |app|
 end
 
 ```
+
+### Install mongodb on the db machine
+
+- Run `sudo apt-get update -y` and `sudo apt-get update -y` to check internet connection.
+- In the db machine run this to download a specific db version sudo systemctl status mongodb`sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D68FA50FEA312927`.
+- Run this `echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list` to download that mongo version.
+- `update` and `upgrade` again.
+- Install mongodb with this command `sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20`.
+- Do `cd /etc` and do `sudo nano mongod.conf`.
+- Change port from `127.0.0.1` to `0.0.0.0`. This is only for dev environment, NOT for PRODUCTION.
+- Restart `mongod` process.
+- Enable `mongod` process.
+
+### Connect the two VMs
+
+- Create a environment variable called DB_HOST: `export DB_HOST="mongodb://192.168.10.150:27017/posts"`.
+- When you run the app, you it connects to the db.
+- Seed the db.
+- When you restart the app, you can now see the db was seeded.
+
+### Automate the db
+
+- create a new provision file for the db vm `db-provision.sh`
+- pass in a list of commands that need to be performed. Next code block for example:
+
+  ```
+  #!/bin/bash
+
+
+  sudo apt-get update -y
+  sudo apt-get upgrade -y
+
+  sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D68FA50FEA312927
+
+  echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+  sudo apt-get update -y
+  sudo apt-get upgrade -y
+
+  sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20
+
+  # edit port with sed
+
+  sudo sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+
+  sudo systemctl restart mongod
+  sudo systemctl enable mongod
+  ```
