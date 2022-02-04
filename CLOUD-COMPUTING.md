@@ -1,5 +1,7 @@
 # Cloud Computing
 
+![aws-ec2-diagram](./public/assets/img/aws-diagram.png)
+
 ## Table of Contents
 
 - [Cloud Computing](#cloud-computing)
