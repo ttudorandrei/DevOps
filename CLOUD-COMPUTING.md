@@ -11,10 +11,10 @@
     - [What is AWS?](#what-is-aws)
     - [AWS Region](#aws-region)
     - [EC2](#ec2)
-    - [Migrating to cloud](#migrating-to-cloud)
-    - [Steps](#steps)
-    - [Deploy](#deploy)
-    - [Create DB EC2 Instance](#create-db-ec2-instance)
+    - [Steps to Launching EC2 Instance and Deploying app and database](#steps-to-launching-ec2-instance-and-deploying-app-and-database)
+    - [Steps to Launching an EC2 instance](#steps-to-launching-an-ec2-instance)
+    - [Upload and Deploy Application to AWS EC2 Instance](#upload-and-deploy-application-to-aws-ec2-instance)
+    - [Deploy DB to AWS EC2 Instance](#deploy-db-to-aws-ec2-instance)
 
 ## Types
 
@@ -48,14 +48,15 @@ AWS is a comprehensive, evolving cloud computing platform provided by Amazon.
 - Create, Required Compute POWER/SERVICE/VM
 - Used on Windows/Linux/Amazon
 
-### Migrating to cloud
+### Steps to Launching EC2 Instance and Deploying app and database
 
-- We need to decide which machines we need to look for in the EC2 Instance. In our case Linux Ubuntu 16.04 (upgraded to) 18.04.
-- Set up Machine with required dependencies.
-- Expose required ports (allow in security group).
-- Enable public ip.
+- Launch two separate EC2 instances, one for the application and one for the Database.
+- SSH into both instances, and install the required dependencies.
+- From localhost (which would be your local machine) or Github you can upload the files required for your app/db to run.
+- In your Security protocols, allow the IPs required for the users to access the app and the app to communicate with the db.
+- Once everything is setup, your app is deployed and ready to use.
 
-### Steps
+### Steps to Launching an EC2 instance
 
 - Go to EC2
 - Click `Launch Machine`
@@ -72,13 +73,17 @@ AWS is a comprehensive, evolving cloud computing platform provided by Amazon.
 - Allow HTTP port 80 to be able to check nginx website.
 - Connect to your EC2 instance `ssh -i "eng103a.pem" ubuntu@ec2-3-250-104-55.eu-west-1.compute.amazonaws.com`.
 
-### Deploy
+### Upload and Deploy Application to AWS EC2 Instance
 
+- We need to decide which machines we need to look for in the EC2 Instance. In our case Linux Ubuntu 16.04 (upgraded to) 18.04.
+- Set up Machine with required dependencies.
+- Expose required ports (allow in security group).
+- Enable public IP.
 - Use this command to sync local folders to ec2 instance `scp -i "~/.ssh/eng103a.pem" -r app ubuntu@ec2-34-240-156-151.eu-west-1.compute.amazonaws.com:~`.
 - To make sure you can access your app on the required port you need to allow that specific port. In our case, this port is port 3000.
 - You can install apps and packages just like in a regular VM.
 
-### Create DB EC2 Instance
+### Deploy DB to AWS EC2 Instance
 
 - Create another EC2 instance for `mongodb`.
 - Setup/install mongodb required version.
