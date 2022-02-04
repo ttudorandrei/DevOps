@@ -240,7 +240,6 @@ For Linux Ubuntu Distro, you can use several commands to update and install pack
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
     }
-  }
   ```
 
 ### Create two VM's (app and DB)
