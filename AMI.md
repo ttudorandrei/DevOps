@@ -2,6 +2,15 @@
 
 An Amazon Machine Images (AMI) provides the information required to launch an instance. You must specify an AMI when you launch an instance.
 
+## Table of Contents
+
+- [Amazon Machine Images](#amazon-machine-images)
+  - [Table of Contents](#table-of-contents)
+  - [Usage](#usage)
+  - [Benefits](#benefits)
+  - [How to create an AMI](#how-to-create-an-ami)
+  - [Create EC2 instance from AMI](#create-ec2-instance-from-ami)
+
 ## Usage
 
 - Helps us save the app status (like taking a snapshot in Vagrant).
