@@ -291,8 +291,8 @@ end
 
 ### Connect the two VMs
 
-- Create a environment variable called DB_HOST: `export DB_HOST="mongodb://192.168.10.150:27017/posts"`.
-- When you run the app, you it connects to the db.
+- In app VM, create a environment variable called DB_HOST: `export DB_HOST="mongodb://192.168.10.150:27017/posts"`.
+- When you run the app, it connects to the db.
 - Seed the db.
 - When you restart the app, you can now see the db was seeded.
 

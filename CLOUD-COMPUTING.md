@@ -90,6 +90,7 @@ AWS is a comprehensive, evolving cloud computing platform provided by Amazon.
 - Changed `mongo.conf` to allow app access.
 - Allowed all ports in Security tab. In production only the app ip HAS to be allowed.
 - Allowed port 27017 and public ip of the app
-- Created env var in `~/.bashrc` `export DB_HOST=mongodb://18.203.237.207:27017/posts`
+- Created env var in `~/.bashrc` `export DB_HOST=mongodb://18.203.237.207:27017/posts` (the ip is the public one from your db EC2 database)
+- Refresh the bashrc file with `source ~/.bashrc`
 - Seeded the db with `node ~/app/seeds/seed.js`
 - Started the app with `npm run start`
