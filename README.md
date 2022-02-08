@@ -4,8 +4,9 @@
 
 - [What is DevOps](#what-is-devops)
   - [Why DevOps?- What is DevOps](#why-devops--what-is-devops)
+  - [Software Development Life-Cycle](#software-development-life-cycle)
     - [Monolith 2 tier & Microservices Architectures](#monolith-2-tier--microservices-architectures)
-  - [Virtualisation with Vagrant](#virtualisation-with-vagrant)
+  - [Virtualization with Vagrant](#virtualization-with-vagrant)
   - [Installing dependencies and creating first VM on Windows](#installing-dependencies-and-creating-first-vm-on-windows)
     - [Step 1 _Install Ruby_](#step-1-install-ruby)
     - [Step 2 _Install Vagrant_](#step-2-install-vagrant)
@@ -35,11 +36,18 @@
 - Robustness - faster delivery of product
 - Cost - cost effective (by automating the process, creating CI/CD pipelines)
 
+## Software Development Life-Cycle
+
+- Planning
+- Developing
+- Testing
+- Monitoring
+
 ### Monolith 2 tier & Microservices Architectures
 
-## Virtualisation with Vagrant
+## Virtualization with Vagrant
 
-![virtualisation-with-vagrant-diagram](./public/assets/img/virtualisation-with-vagrant-diagram.png)
+![virtualization-with-vagrant-diagram](./public/assets/img/virtualisation-with-vagrant-diagram.png)
 
 ## Installing dependencies and creating first VM on Windows
 

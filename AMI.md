@@ -10,6 +10,9 @@ An Amazon Machine Images (AMI) provides the information required to launch an in
   - [Benefits](#benefits)
   - [How to create an AMI](#how-to-create-an-ami)
   - [Create EC2 instance from AMI](#create-ec2-instance-from-ami)
+  - [Alert Management](#alert-management)
+    - [SNS (Simple Notification Service)](#sns-simple-notification-service)
+    - [SQS (Simple Queue Service)](#sqs-simple-queue-service)
 
 ## Usage
 
@@ -39,3 +42,13 @@ An Amazon Machine Images (AMI) provides the information required to launch an in
 - Go through the steps as usual BUT, on the `Security` tab, choose `existing rules` and look for the rules that already exist for the app.
 - Launch instance and ssh into it using the new IP.
 - All of your data should be there.
+
+## Alert Management
+
+### SNS (Simple Notification Service)
+
+This service is used paired with an alert. When the alert goes off, the Engineer will receive an email with the actual alert.
+
+### SQS (Simple Queue Service)
+
+Amazon Simple Queue Service (SQS) is a fully managed message queuing service that enables you to decouple and scale microservices, distributed systems, and serverless applications.

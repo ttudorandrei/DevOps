@@ -37,7 +37,7 @@ AWS is a comprehensive, evolving cloud computing platform provided by Amazon.
 
 ### AWS Region
 
-- Check this link for and [overview](https://aws.amazon.com/about-aws/global-infrastructure/?p=ngi&loc=1).
+- Check this link for [overview](https://aws.amazon.com/about-aws/global-infrastructure/?p=ngi&loc=1).
 - Region for us is Europe.
 - Minimum two availability zones.
 - Orange zones are coming soon, blue zones are already functioning.
@@ -45,7 +45,7 @@ AWS is a comprehensive, evolving cloud computing platform provided by Amazon.
 ### EC2
 
 - Stands for `Elastic Compute Service`
-- Create, Required Compute POWER/SERVICE/VM
+- Create Required Compute POWER/SERVICE/VM
 - Used on Windows/Linux/Amazon
 
 ### Steps to Launching EC2 Instance and Deploying app and database
