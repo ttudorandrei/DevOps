@@ -11,6 +11,7 @@
   - [Use Cases](#use-cases)
   - [S3 Storage Classes (WIP)](#s3-storage-classes-wip)
   - [Steps to Log into S3](#steps-to-log-into-s3)
+  - [Perform CRUD Operations in AWS S3](#perform-crud-operations-in-aws-s3)
 
 ## What is Amazon S3
 
@@ -52,3 +53,12 @@ Amazon Simple Storage Service (Amazon S3) is an object storage service that offe
 - Input region `eu-west-1`.
 - Choose `json` as the preferred language.
 - If everything is done correctly, if you type `aws s3 ls` we will get a list of files in the specified S3 bucket
+
+## Perform CRUD Operations in AWS S3
+
+- Create a bucket with ` aws s3 mb s3://<name of bucket>`. `mb` stands for "make bucket". S3 **DOES NOT ALLOW** underscores "\_"
+- Add folder from ec2 instance to s3 bucket using `aws s3 cp <filename + extesnion> s3://<bucket name>`.
+- List files inside specific bucket with `aws s3 ls s3://YOUR_BUCKET --recursive --human-readable --summarize`
+- Download data from S3 bucket to ec2 instance with `aws s3 cp s3://<bucket name>/<filepath/filename> <destination path>`. Use `~` instead of destination path in case you want the file(s) downloaded at root folder.
+- Delete **everything** inside the bucket `aws s3 rm s3://<bucket name> --recursive`
+- Remove s3 `aws s3 rb s3://<bucket name>`
