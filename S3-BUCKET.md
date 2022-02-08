@@ -12,6 +12,7 @@
   - [S3 Storage Classes (WIP)](#s3-storage-classes-wip)
   - [Steps to Log into S3](#steps-to-log-into-s3)
   - [Perform CRUD Operations in AWS S3](#perform-crud-operations-in-aws-s3)
+  - [Perform CRUD Operations in AWS S3 with Python Scripts](#perform-crud-operations-in-aws-s3-with-python-scripts)
 
 ## What is Amazon S3
 
@@ -62,3 +63,63 @@ Amazon Simple Storage Service (Amazon S3) is an object storage service that offe
 - Download data from S3 bucket to ec2 instance with `aws s3 cp s3://<bucket name>/<filepath/filename> <destination path>`. Use `~` instead of destination path in case you want the file(s) downloaded at root folder.
 - Delete **everything** inside the bucket `aws s3 rm s3://<bucket name> --recursive`
 - Remove s3 `aws s3 rb s3://<bucket name>`
+
+## Perform CRUD Operations in AWS S3 with Python Scripts
+
+- Install boto3 : `pip3 install boto3`
+- [Create Bucket](https://stackoverflow.com/questions/31092056/how-to-create-a-s3-bucket-using-boto3)
+
+```
+import boto3
+s3 = boto3.client("s3")
+bucket_name = "eng103a-tudor-devops"
+location = {"LocationConstraint": "eu-west-1"}
+
+s3.create_bucket(Bucket=bucket_name, CreateBucketConfiguration=location)
+print('bucket created')
+```
+
+- [Upload to Bucket](https://stackoverflow.com/questions/15085864/how-to-upload-a-file-to-directory-in-s3-bucket-using-boto)
+
+```
+import boto3
+s3 = boto3.resource("s3")
+filename = "test.txt"
+bucket_name = "eng103a-tudor-devops"
+location = {"LoactionContraint": "eu-west-1"}
+s3_client = boto3.client("s3")
+
+s3_client.upload_file(filename, bucket_name, filename)
+print('file uploaded')
+```
+
+- [Download File from Bucket](https://stackoverflow.com/questions/50100221/download-file-from-aws-s3-using-python)
+
+```
+import boto3
+s3 = boto3.resource("s3")
+s3.meta.client.download_file("eng103a-tudor-devops", "test.txt", "test.txt")
+print('file downloaded')
+```
+
+- [Delete File from Bucket](https://stackoverflow.com/questions/3140779/how-to-delete-files-from-amazon-s3-bucket)
+
+```
+import  boto3
+
+s3 = boto3.resource('s3')
+
+s3.Object('eng103a-tudor-devops', 'test.txt').delete()
+print('file deleted')
+```
+
+- [Delete Bucket](https://stackoverflow.com/questions/44281684/delete-aws-s3-buckets-using-boto3-attributeerror)
+
+```
+import boto3
+
+s3 = boto3.client('s3')
+bucket = 'eng103a-tudor-devops'
+response = s3.delete_bucket(Bucket=bucket)
+print('bucket deleted')
+```
