@@ -1,5 +1,7 @@
 # AWS Autoscaling and Load Balancing
 
+![Auto Scaling Group Logo](./public/assets/img/asg-diagram.png)
+
 ## Table of Contents
 
 - [AWS Autoscaling and Load Balancing](#aws-autoscaling-and-load-balancing)
@@ -32,7 +34,7 @@ Load Balancing distributes traffic between EC2 instances so that no one instance
 - For instance type choose t2.micro
 - Provide Key Pair name (eng103a)
 - Don't include Network Settings in launch template
-- Create two security groups. One for `HTTP`, allow from any IP on `port 80` and the second one for `ssh`, allow only from your IP for `port 22`
+- Create two security groups. One for `HTTP`, allow from any IP on `port 80` and the second one for `ssh`, allow only from your IP for `port 22`. Also, you will need to allow the port for the actual app. Make sure you `allow the correct port for your app`
 
 ## Load Balancing and Autoscaling - Steps
 
@@ -46,7 +48,7 @@ Load Balancing distributes traffic between EC2 instances so that no one instance
 - Choose the appropriate one, in this case `Application Load Balancer`.
 - Name the load balancer
 - For balancer scheme choose `Internet Facing`
-- Allow HTTP Portocol in `Listeners Group` and add new target group name `eng103a-tudor-listeners-groups-lb`
+- Allow HTTP Protocol in `Listeners Group` and add new target group name `eng103a-tudor-listeners-groups-lb`
 - Tick ELB under `Health Checks`
 - Enable Group Metrics and click `next`
 - For `Group Size`, Desired capacity = 2, min cap = 2, max cap = 3
