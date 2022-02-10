@@ -12,6 +12,7 @@
   - [What is Route Table](#what-is-route-table)
   - [What is a Subnet](#what-is-a-subnet)
   - [What is NACL](#what-is-nacl)
+  - [Creating a VPC](#creating-a-vpc)
 
 ## What is a VPC
 
@@ -38,3 +39,19 @@ A subnet is a range of IP addresses in your VPC. You can launch AWS resources, s
 ## What is NACL
 
 A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets. You might set up network ACLs with rules similar to your security groups in order to add an additional layer of security to your VPC.
+
+## Creating a VPC
+
+- Choose a region (Ireland)
+- Create VPC
+- Choose a valid `CIDR Block` for the VPC (10.0.0.0/16)
+- Create `Internet Gateway` **AND attach** the Internet Gateway to our VPC
+- Create a `Public Subnet`
+- Associate subnet to VPC **AND** create route table/s for `Public Subnet`
+- Edit routes to **allow** `Internet Gateway`
+- Associate to our `Public Subnet`
+- Create `Security Group` in our public subnet to allow required ports
+- IF we are really precise, we need to `allow port 80, 3000, https - ssl`
+- Subnet CIDR block for public - 10.0.1.0/24. A wrong CIDR block CAN NOT be created
+
+- CIDR Block: 10.0.7.0/24
